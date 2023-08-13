@@ -59,11 +59,11 @@ export class AuthService {
     this.setToken('TOKEN');
     this.currentUserRole && this.setRole(this.currentUserRole);
 
-    this.userRedirect();
+    this.redirectUser();
     return { success: true, userRole: this.currentUserRole };
   }
 
-  userRedirect(): void {
+  redirectUser(): void {
     if (!this.currentUserRole || !this.getToken()) return;
     this.currentUserRole === UserRole.USER && this.router.navigate(['/user']);
     this.currentUserRole === UserRole.ADMIN && this.router.navigate(['/admin']);

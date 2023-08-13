@@ -23,7 +23,7 @@ export class DeAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.auth.getToken() && this.auth.userRedirect()
+    this.auth.getToken() && this.auth.redirectUser()
     return !this.auth.getToken();
   }
 }
