@@ -38,13 +38,13 @@ describe('LoginComponent', () => {
 
   it('should initialize the form with empty values', () => {
     component.ngOnInit();
-    expect(component.loginForm.value).toEqual({ email: null, password: '' });
+    expect(component.loginForm.value).toEqual({ username: null, password: '' });
   });
 
-  it('should submit valid form and navigate to users', () => {
+  it('should submit valid form and navigate to products', () => {
     component.ngOnInit();
-    component.loginForm.patchValue({ email: 'test@example.com', password: 'password123' });
-    authService.login.and.returnValue(of({ token: "token" }));
+    component.loginForm.patchValue({ username: 'example', password: 'password123' });
+    authService.login.and.returnValue(true);
     const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
     submitButton.click();
     expect(component.loginForm.valid).toBeTrue();

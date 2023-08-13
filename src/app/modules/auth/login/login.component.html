@@ -1,66 +1,45 @@
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-8 p-0 offset-md-2 col-12">
+  <div class="row justify-content-center">
+    <div class="col-md-6 p-0 mt-5 col-12">
+      <mat-card class="px-4 pt-3">
+        <mat-card-title class=" mb-3">Login</mat-card-title>
+        <mat-card-content class="px-0">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" action="">
+            <div class="d-flex flex-column">
 
+              <mat-form-field>
+                <input formControlName="username" type="text" matInput [ngClass]="{'is-invalid':
+        loginForm.get('username')?.touched &&
+        (loginForm.get('username')?.hasError('username') ||
+        loginForm.get('username')?.hasError('required')
+      )}" id="username" placeholder="Enter your username">
+                <small *ngIf="
+loginForm.get('username')?.hasError('username') &&
+!loginForm.get('username')?.hasError('required')" class="invalid-feedback">Please enter a valid username</small>
 
-
-
-        <mat-card class="px-4 pt-3">
-          <mat-card-title class=" mb-3">Login</mat-card-title>
-          <mat-card-content class="px-0">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" action="">
-
-              <div class="d-flex flex-column">
-
-
-                <mat-form-field>
-                  <input formControlName="email" type="text" matInput [ngClass]="{'is-invalid':
-        loginForm.get('email')?.touched &&
-        (loginForm.get('email')?.hasError('email') ||
-        loginForm.get('email')?.hasError('required')
-      )}" id="email" placeholder="Enter your email">
-                  <small *ngIf="
-loginForm.get('email')?.hasError('email') &&
-!loginForm.get('email')?.hasError('required')" class="invalid-feedback">Please enter a valid email</small>
-
-                  <small *ngIf="
-loginForm.get('email')?.touched &&
-(loginForm.get('email')?.hasError('required') &&
-!loginForm.get('email')?.hasError('email'))" class="invalid-feedback">Email is required</small>
-
-                </mat-form-field>
-
-
-
-
-                <mat-form-field>
-
-                  <input formControlName="password" type="password" placeholder="Password" matInput [ngClass]="{'is-invalid':
+                <small *ngIf="
+loginForm.get('username')?.touched &&
+(loginForm.get('username')?.hasError('required') &&
+!loginForm.get('username')?.hasError('username'))" class="invalid-feedback">Username is required</small>
+              </mat-form-field>
+              <mat-form-field>
+                <input formControlName="password" type="password" placeholder="Password" matInput [ngClass]="{'is-invalid':
         loginForm.get('password')?.touched &&
         loginForm.get('password')?.hasError('required'
       )}" id="password" placeholder="Enter your password">
 
-                  <small *ngIf="
+                <small *ngIf="
     loginForm.get('password')?.hasError('required') ||
     loginForm.get('password')?.touched" class="invalid-feedback">Password is required</small>
-                </mat-form-field>
+              </mat-form-field>
 
 
-              </div>
-
-
-
-
-              <div class="button">
-                <button type="submit" mat-raised-button color="primary">Login</button>
-              </div>
-
-            </form>
-          </mat-card-content>
-        </mat-card>
-
-
-
-
+            </div>
+            <div class="button">
+              <button type="submit" mat-raised-button color="primary">Login</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-</div>

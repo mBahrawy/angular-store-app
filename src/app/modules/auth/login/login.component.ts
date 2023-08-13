@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
+const nameRegex = /^[a-z0-9.-]+$/i;
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -14,7 +15,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.email, Validators.required]),
+      username: new FormControl(null, [
+        Validators.pattern(nameRegex),
+        Validators.required,
+      ]),
       password: new FormControl('', Validators.required),
     });
   }
@@ -28,10 +32,12 @@ export class LoginComponent implements OnInit {
       return;
     }
     // Form is validated
-    this.auth
-      .login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(() => {
-        this.router.navigate(['/users']);
-      });
+    const isLoggedIn = this.auth.login(
+      this.loginForm.value.username,
+      this.loginForm.value.password
+    );
+
+
+    isLoggedIn && this.router.navigate(['/products']);
   }
 }

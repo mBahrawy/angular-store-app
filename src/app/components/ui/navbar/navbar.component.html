@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="d-fle justify-content-between">
+  <span>Angular Store</span>
+
+  <div>
+    <span class="spacer"></span>
+    <a mat-button *ngIf="auth.isAuth$ | async" routerLink="/products">Products</a>
+    <a mat-button *ngIf="auth.isAuth$ | async" routerLink="/checkout">Checkout</a>
+    <ng-container *ngIf="auth.isAuth$ | async">
+      <a mat-button routerLink="/profile">Profile</a>
+      <a mat-button (click)="logout()">Logout</a>
+    </ng-container>
+    <ng-template *ngIf="!(auth.isAuth$ | async)" #loginTemplate>
+      <a mat-button routerLink="/login">Login</a>
+    </ng-template>
+  </div>
+</mat-toolbar>

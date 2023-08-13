@@ -15,10 +15,12 @@ import { AuthService } from './core/services/auth.service';
 import { HttpService } from './core/services/http.service';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { NavbarComponent } from './components/ui/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     MaterialModule,
