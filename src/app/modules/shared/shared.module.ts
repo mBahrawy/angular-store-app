@@ -4,18 +4,23 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from 'src/app/components/ui/loader/loader.component';
+import { NavbarComponent } from 'src/app/components/ui/navbar/navbar.component';
+import { NotFoundComponent } from 'src/app/components/views/not-found/not-found.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
-  declarations: [LoaderComponent],
-  imports: [CommonModule, RouterModule, ],
+  declarations: [LoaderComponent, NavbarComponent],
+  imports: [CommonModule, RouterModule, MaterialModule],
   providers: [],
   exports: [
+    MaterialModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     LoaderComponent,
     HttpClientModule,
+    NavbarComponent
   ],
 })
 export class SharedModule {}

@@ -13,17 +13,11 @@ import { RequestInterceptor } from './core/interceptors/request.interceptor';
 import { RespondInterceptor } from './core/interceptors/respond.interceptor';
 import { AuthService } from './core/services/auth.service';
 import { HttpService } from './core/services/http.service';
-import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './modules/shared/shared.module';
-import { NavbarComponent } from './components/ui/navbar/navbar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    MaterialModule,
     SharedModule,
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +37,6 @@ import { NavbarComponent } from './components/ui/navbar/navbar.component';
     { provide: HTTP_INTERCEPTORS, useClass: RespondInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

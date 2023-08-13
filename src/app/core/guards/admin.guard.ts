@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { UserRole } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DeAuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+export class AdminGuard implements CanActivate {
+  constructor(private auth: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,7 +23,6 @@ export class DeAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.auth.getToken() && this.auth.userRedirect()
-    return !this.auth.getToken();
+    return this.auth.getRole() === UserRole.ADMIN;
   }
 }

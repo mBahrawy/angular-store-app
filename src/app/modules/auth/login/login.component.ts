@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRole } from 'src/app/core/interfaces/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 const nameRegex = /^[a-z0-9.-]+$/i;
@@ -32,12 +33,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     // Form is validated
-    const isLoggedIn = this.auth.login(
+    const { success, userRole } = this.auth.login(
       this.loginForm.value.username,
       this.loginForm.value.password
     );
-
-
-    isLoggedIn && this.router.navigate(['/products']);
   }
 }
