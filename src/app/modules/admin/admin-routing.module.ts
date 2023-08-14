@@ -5,7 +5,10 @@ import { ProductsTableComponent } from './products-table/products-table.componen
 const routes: Routes = [
   {
     path: '',
-    component: ProductsTableComponent,
+    loadComponent: () =>
+    import('./products-table/products-table.component').then(
+      (m) => m.ProductsTableComponent
+    ),
   },
 ];
 
