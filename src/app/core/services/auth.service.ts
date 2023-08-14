@@ -65,7 +65,7 @@ export class AuthService {
 
   redirectUser(): void {
     if (!this.currentUserRole || !this.getToken()) return;
-    this.currentUserRole === UserRole.USER && this.router.navigate(['/user']);
+    this.currentUserRole === UserRole.USER && this.router.navigate(['/']);
     this.currentUserRole === UserRole.ADMIN && this.router.navigate(['/admin']);
   }
 
@@ -98,6 +98,6 @@ export class AuthService {
     this.removeToken();
     this.removeRole();
     this.isAuth$.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 }

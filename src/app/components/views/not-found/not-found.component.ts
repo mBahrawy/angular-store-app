@@ -15,6 +15,6 @@ export class NotFoundComponent {
   handleHoToHome() {
     this.auth.getToken()
       ? this.auth.redirectUser()
-      : this.router.navigate(['/login']);
+      : this.router.navigate(['/auth']);
   }
 }
