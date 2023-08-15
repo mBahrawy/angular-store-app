@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/core/interfaces/product';
 import { ProductsService } from 'src/app/core/services/products.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 
-import {MatTableModule} from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.scss'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterModule],
 })
 export class ProductsTableComponent {
   displayedColumns: string[] = ['id', 'title', 'price', 'category', 'rating', 'image', 'actions'];
@@ -29,7 +30,13 @@ export class ProductsTableComponent {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private products: ProductsService) {}
+
+  delete(productId: number): void {
+    this.products.openDeleteModal(productId, () => {
+      this.loadProducts()
+    });
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Product>();
@@ -39,7 +46,7 @@ export class ProductsTableComponent {
   }
 
   loadProducts(): void {
-    this.productsService.index().subscribe(result => {
+    this.products.index().subscribe(result => {
       this.dataSource.data = result;
       this.totalItems = result.length;
     });

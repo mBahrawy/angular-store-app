@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const modules = [
   MatCardModule,
@@ -23,6 +24,7 @@ const modules = [
   MatPaginatorModule,
   MatSortModule,
   MatTableModule,
+  MatDialogModule,
 ];
 
 @NgModule({
