@@ -1,6 +1,13 @@
 <div class="container my-5">
-  <div class="row ">
-    <div>
+  <div class="row">
+    <div class="col-12 d-flex mb-3 justify-content-end">
+      <button [routerLink]="['new']" mat-raised-button color="primary" aria-label="Add">
+       Create new product <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
 
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 

@@ -12,3 +12,11 @@ export interface Rating {
   rate: number;
   count: number;
 }
+
+export interface ProductFormData {
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
+}

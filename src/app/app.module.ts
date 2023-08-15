@@ -14,11 +14,9 @@ import { RespondInterceptor } from './core/interceptors/respond.interceptor';
 import { AuthService } from './core/services/auth.service';
 import { HttpService } from './core/services/http.service';
 import { SharedModule } from './modules/shared/shared.module';
-import { ProductViewComponent } from './components/product-view/product-view.component';
-import { DeleteProductModalComponent } from './components/ui/delete-product-modal/delete-product-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductViewComponent, DeleteProductModalComponent],
+  declarations: [AppComponent],
   imports: [
     SharedModule,
     BrowserModule,

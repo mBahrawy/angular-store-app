@@ -7,6 +7,8 @@ import { LoaderComponent } from 'src/app/components/ui/loader/loader.component';
 import { NavbarComponent } from 'src/app/components/ui/navbar/navbar.component';
 import { NotFoundComponent } from 'src/app/components/views/not-found/not-found.component';
 import { MaterialModule } from '../material/material.module';
+import { ProductViewComponent } from 'src/app/components/product-view/product-view.component';
+import { DeleteProductModalComponent } from 'src/app/components/ui/delete-product-modal/delete-product-modal.component';
 
 const modules = [
   MaterialModule,
@@ -17,7 +19,13 @@ const modules = [
   HttpClientModule,
 ];
 
-const componenets = [LoaderComponent, NavbarComponent, NotFoundComponent];
+const componenets = [
+  LoaderComponent,
+  NavbarComponent,
+  NotFoundComponent,
+  ProductViewComponent,
+  DeleteProductModalComponent,
+];
 @NgModule({
   declarations: [...componenets],
   imports: [modules],
