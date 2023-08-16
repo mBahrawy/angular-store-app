@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoaderService {
-  isLoading = new Subject<boolean>();
+  isLoading$ = new Subject<boolean>();
 
   show() {
-    this.isLoading.next(true);
+    this.isLoading$.next(true);
   }
 
   hide() {
-    this.isLoading.next(false);
+    this.isLoading$.next(false);
   }
 }
