@@ -9,6 +9,7 @@ import { NotFoundComponent } from 'src/app/components/views/not-found/not-found.
 import { MaterialModule } from '../material/material.module';
 import { ProductViewComponent } from 'src/app/components/product-view/product-view.component';
 import { DeleteProductModalComponent } from 'src/app/components/ui/delete-product-modal/delete-product-modal.component';
+import { TruncatePipe } from 'src/app/core/pipes/truncate.pipe';
 
 const modules = [
   MaterialModule,
@@ -26,10 +27,14 @@ const componenets = [
   ProductViewComponent,
   DeleteProductModalComponent,
 ];
+
+const pipes = [
+  TruncatePipe
+]
 @NgModule({
-  declarations: [...componenets],
+  declarations: [...componenets, ...pipes],
   imports: [modules],
   providers: [],
-  exports: [...modules, ...componenets],
+  exports: [...modules, ...componenets, ...pipes],
 })
 export class SharedModule {}

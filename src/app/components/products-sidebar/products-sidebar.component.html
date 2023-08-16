@@ -1,0 +1,12 @@
+<h4>Filter products</h4>
+<mat-divider></mat-divider>
+
+<div class="d-flex flex-column">
+  <mat-checkbox [(ngModel)]="isAllCategoriesChecked" (change)="handleAllCheck()" >
+    All categories
+  </mat-checkbox>
+  <mat-checkbox *ngFor="let category of checkBoxcategories" (change)="handleCheck()" [(ngModel)]="category.checked">
+    {{ category.name }}
+  </mat-checkbox>
+
+</div>

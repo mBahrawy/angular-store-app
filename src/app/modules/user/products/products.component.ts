@@ -1,10 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Category } from 'src/app/core/interfaces/category';
+import { Product } from 'src/app/core/interfaces/product';
+import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
+  categoriesList!: Category[];
+  filteredCategories: Category[] = [];
+  isAllCategoriesChecked: boolean = true;
+  productsList!: Product[];
+  filterdProductsList: Product[] = [];
+  private productsSub$: Subscription = new Subscription();
 
+  constructor(
+    private route: ActivatedRoute,
+    private products: ProductsService
+  ) {}
+
+  handleFilteredCategoriesChange($event: Category[]) {
+    this.filteredCategories = $event;
+    this.handleApplyFilter();
+  }
+
+  handleIsAllCategoriesCheckedChange($event: boolean) {
+    this.isAllCategoriesChecked = $event;
+    if ($event) {
+      this.filterdProductsList = [...this.productsList];
+      this.filteredCategories = [...this.categoriesList];
+    } else {
+      this.filterdProductsList = [];
+      this.filteredCategories = [];
+    }
+  }
+
+  handleApplyFilter() {
+    this.filterdProductsList = [...this.productsList].filter((prod) => {
+      return this.filteredCategories.some(
+        (category) => category === prod.category
+      );
+    });
+  }
+
+  loadProducts(): void {
+    this.productsSub$ = this.products.index().subscribe((result) => {
+      this.productsList = result;
+      this.handleApplyFilter();
+      if (this.isAllCategoriesChecked)
+        this.filterdProductsList = [...this.productsList];
+    });
+  }
+
+  ngOnInit(): void {
+    this.categoriesList = this.route.snapshot.data['categories']; // Access resolved categories
+    this.loadProducts();
+  }
+
+  ngOnDestroy(): void {
+    this.productsSub$.unsubscribe();
+  }
 }

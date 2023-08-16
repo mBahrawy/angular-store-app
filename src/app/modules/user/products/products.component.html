@@ -1,1 +1,61 @@
-<p>products works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <app-products-sidebar [allCategories]="categoriesList" [filteredCategories]="filteredCategories"
+        (filteredCategoriesChange)="handleFilteredCategoriesChange($event)"
+        [isAllCategoriesChecked]="isAllCategoriesChecked"
+        (isAllCategoriesCheckedChange)="handleIsAllCategoriesCheckedChange($event)"></app-products-sidebar>
+    </div>
+
+    <div class="col-md-9">
+
+
+      <div class="row" *ngIf="productsList">
+
+        <div class="col-md-4 col-sm-3 col-12 d-flex flex-column mb-3" *ngFor="let product of filterdProductsList">
+
+
+          <mat-card class="d-flex flex-column flex-grow-1">
+            <mat-card-header>
+              <mat-card-title>{{product.title}}</mat-card-title>
+              <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+            </mat-card-header>
+            <img class="product-image" mat-card-image [src]="product.image" [alt]="product.title">
+            <mat-card-content class="d-flex flex-column flex-grow-1">
+              <p class="flex-grow-1">
+                {{product.description | truncate: 150}}
+              </p>
+
+              <h4 class="mb-1"><b>Rating: </b>{{product.rating.rate}}/5</h4>
+              <h4 class="mb-1"><b>Stock: </b>{{product.rating.count}}</h4>
+
+            </mat-card-content>
+            <mat-divider class="mt-2"></mat-divider>
+            <mat-card-actions class="d-flex justify-content-between">
+              <h4 class="mb-1 ms-1"><b>Price: </b>{{product.price | currency}}</h4>
+              <button mat-raised-button color="primary">View</button>
+
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="productsList && !filterdProductsList.length">
+        <div class="col-md-12">
+          <h2 class="text-center mt-5">No products to be shown.</h2>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
