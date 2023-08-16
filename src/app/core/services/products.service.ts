@@ -22,10 +22,7 @@ export class ProductsService {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      result && this.destroy(productId).subscribe(() => {
-        this.toaster.success('Product deleted successfully');
-        callback();
-      });
+      result && this.destroy(productId).subscribe(callback);
     });
   }
 
@@ -37,12 +34,16 @@ export class ProductsService {
     return this.http.postRequest<Product>(`products`, product).pipe(tap(() => this.toaster.success('Product created successfully')));
   }
 
+  edit(id: number, product: ProductFormData): Observable<Product> {
+    return this.http.putRequest<Product>(`products/${id}`, product).pipe(tap(() => this.toaster.success('Product edited successfully')));
+  }
+
 
   single(id: string): Observable<Product> {
     return this.http.getRequest<Product>(`products/${id}`);
   }
 
   destroy(id: number): Observable<Product> {
-    return this.http.deleteRequest<Product>(`products/${id}`);
+    return this.http.deleteRequest<Product>(`products/${id}`).pipe(tap(() => this.toaster.success('Product deleted successfully')));;
   }
 }

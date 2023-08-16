@@ -10,8 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const modules = [
   MatCardModule,
@@ -27,6 +28,7 @@ const modules = [
   MatTableModule,
   MatDialogModule,
   MatSelectModule,
+  MatGridListModule,
 ];
 
 @NgModule({

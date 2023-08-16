@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container-fluid container-lg my-5">
   <div class="row">
     <div class="col-12 d-flex mb-3 justify-content-end">
       <button [routerLink]="['new']" mat-raised-button color="primary" aria-label="Add">
@@ -19,47 +19,50 @@
 
         <!-- Title Column -->
         <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-          <td mat-cell *matCellDef="let product"><button [routerLink]="[product.id]" class="btn btn-link link">{{ product.title }}</button></td>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+          <td class="p-1" mat-cell *matCellDef="let product"><button [routerLink]="[product.id]" class="btn btn-link link">{{ product.title }}</button></td>
         </ng-container>
 
         <!-- Price Column -->
         <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-          <td mat-cell *matCellDef="let product"><div>{{ product.price }}</div></td>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <td class="p-1" mat-cell *matCellDef="let product"><div>{{ product.price }}</div></td>
         </ng-container>
 
         <!-- Category Column -->
         <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-          <td mat-cell *matCellDef="let product"><div>{{ product.category }}</div></td>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+          <td class="p-1" mat-cell *matCellDef="let product"><div>{{ product.category }}</div></td>
         </ng-container>
 
         <!-- Rating Column -->
         <ng-container matColumnDef="rating">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
-          <td mat-cell *matCellDef="let product">{{ product.rating.rate }}</td>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+          <td class="p-1" mat-cell *matCellDef="let product">{{ product.rating.rate }}</td>
         </ng-container>
 
         <!-- Image Column -->
         <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
-          <td mat-cell *matCellDef="let product">
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+          <td class="p-1" mat-cell *matCellDef="let product">
             <img [src]="product.image" alt="Product Image" class="product-image" />
           </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-          <td mat-cell *matCellDef="let product">
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td class="p-1" mat-cell *matCellDef="let product">
 
             <div class="d-flex">
-              <button (click)="delete(product.id)" mat-icon-button color="warn" aria-label="Delete">
+              <button class="p-0 m-0" (click)="delete(product.id)" mat-icon-button color="warn" aria-label="Delete">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button [routerLink]="[product.id]" mat-icon-button color="primary" aria-label="View">
+              <button class="p-0 m-0" [routerLink]="[product.id]" mat-icon-button color="primary" aria-label="View">
                 <mat-icon>remove_red_eye</mat-icon>
+              </button>
+              <button class="p-0 m-0" [routerLink]="[product.id + '/edit']" mat-icon-button color="primary" aria-label="Edit">
+                <mat-icon>edit</mat-icon>
               </button>
             </div>
 

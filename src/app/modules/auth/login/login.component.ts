@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRole } from 'src/app/core/interfaces/user';
+import { regex } from 'src/app/core/helpers/regex';
 import { AuthService } from 'src/app/core/services/auth.service';
 
-const nameRegex = /^[a-z0-9.-]+$/i;
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [
-        Validators.pattern(nameRegex),
+        Validators.pattern(regex.username),
         Validators.required,
       ]),
       password: new FormControl('', Validators.required),

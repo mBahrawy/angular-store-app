@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Product } from 'src/app/core/interfaces/product';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-view',
@@ -18,7 +19,12 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     private products: ProductsService,
     private route: ActivatedRoute,
     private auth: AuthService,
+    private location: Location
   ) {}
+
+  handleBack() {
+    this.location.back();
+  }
 
   delete(): void {
     this.products.openDeleteModal(this.product.id, () => {

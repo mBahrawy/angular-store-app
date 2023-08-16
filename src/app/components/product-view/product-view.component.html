@@ -5,7 +5,7 @@
       <mat-card class="product-card">
         <mat-card-header class="mb-3 d-flex">
 
-          <button [routerLink]="['..']" mat-icon-button color="primary" aria-label="Back">
+          <button (click)="handleBack()" mat-icon-button color="primary" aria-label="Back">
             <mat-icon>keyboard_arrow_left</mat-icon>
           </button>
 
@@ -44,7 +44,7 @@
           <button (click)="delete()" mat-button color="warn" aria-label="Delete">
             <mat-icon>delete</mat-icon> Delete
           </button>
-          <button mat-button color="primary" aria-label="Edit">
+          <button [routerLink]="['edit']" mat-button color="primary" aria-label="Edit">
             <mat-icon>edit</mat-icon> Edit
           </button>
         </mat-card-actions>

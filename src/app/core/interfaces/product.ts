@@ -15,7 +15,7 @@ export interface Rating {
 
 export interface ProductFormData {
   title: string;
-  price: number;
+  price: number | '';
   description: string;
   image: string;
   category: string;

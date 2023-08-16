@@ -1,39 +1,112 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-5" *ngIf="productForm">
+  <div class="row justify-content-center">
     <div class="col-md-12">
       <mat-card class="product-card">
         <mat-card-header class="mb-3 d-flex">
-          <button [routerLink]="['..']" mat-icon-button color="primary" aria-label="Back">
+          <button (click)="handleBack()" mat-icon-button color="primary" aria-label="Back">
             <mat-icon>keyboard_arrow_left</mat-icon>
           </button>
-          <div>
-            <mat-card-title>Create Product</mat-card-title>
+          <div [ngSwitch]="formType" class="d-flex align-items-center">
+
+            <mat-card-title *ngSwitchCase="'create'">Add an new product</mat-card-title>
+            <mat-card-title *ngSwitchCase="'edit'">Edit product</mat-card-title>
+            <mat-card-title *ngSwitchDefault>Product form</mat-card-title>
+
           </div>
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="productForm" (submit)="onSubmit()">
-            <mat-form-field class="mb-3" appearance="fill">
-              <mat-label>Title</mat-label>
-              <input matInput formControlName="title" required>
-            </mat-form-field>
-            <mat-form-field class="mb-3" appearance="fill">
-              <mat-label>Price</mat-label>
-              <input matInput type="number" formControlName="price" required>
-            </mat-form-field>
-            <mat-form-field class="mb-3" appearance="fill">
-              <mat-label>Description</mat-label>
-              <textarea matInput formControlName="description" required></textarea>
-            </mat-form-field>
-            <mat-form-field class="mb-3" appearance="fill">
-              <mat-label>Category</mat-label>
-              <mat-select formControlName="category" required>
-                <mat-option value="computer">Computer</mat-option>
-                <mat-option value="mobile">Mobile</mat-option>
-                <mat-option value="tv">TV</mat-option>
-                <mat-option value="accessories">Accessories</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit">Create</button>
+            <div class="row">
+
+              <div class="col-md-6">
+
+                <div class="row">
+                  <div class="col-md-12 mb-2">
+                    <mat-form-field class="w-100" appearance="fill">
+                      <mat-label>Title</mat-label>
+                      <input matInput formControlName="title" required>
+                      <mat-error>Please enter a product title</mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div class="col-md-12 mb-2"> <mat-form-field class="w-100" appearance="fill">
+                      <mat-label>Price</mat-label>
+                      <input matInput type="number" formControlName="price" required>
+                      <mat-error>Please enter a product price</mat-error>
+
+                    </mat-form-field></div>
+                  <div class="col-md-12 mb-2"> <mat-form-field class="w-100" appearance="fill">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput formControlName="description" required></textarea>
+
+                      <mat-error *ngIf="productForm.get('description')?.hasError('required')">Please enter a product description</mat-error>
+                      <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">Product description is too short</mat-error>
+                      <mat-error *ngIf="productForm.get('description')?.hasError('maxlength')">Product description is too long</mat-error>
+                    </mat-form-field></div>
+                  <div class="col-md-12 mb-2">
+
+                    <mat-form-field *ngIf="categoriesList" class="w-100" appearance="fill">
+                      <mat-label>Category</mat-label>
+                      <mat-select formControlName="category" required>
+
+                        <mat-option *ngFor="let category of categoriesList" [value]="category"><span
+                            class="text-capitalize">{{category}}</span> </mat-option>
+
+                      </mat-select>
+                      <mat-error>Please select a category</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+
+
+                    <div class="col-md-12 mb-2">
+
+
+                      <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Image URL</mat-label>
+                        <input (input)="onImageUrlChange()" matInput formControlName="image" required>
+                        <mat-error *ngIf="productForm.get('image')?.hasError('required')">Please add a product image url</mat-error>
+                        <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">Please add a valid product image url</mat-error>
+                      </mat-form-field>
+
+
+
+                    </div>
+                </div>
+
+              </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                  <div *ngIf="productForm.value.image && validImageUrl" >
+                    <img [src]="productForm.get('image')?.value" (error)="handleImageError()" [alt]="productForm.value.title" class="product-img img-fluid w-100 avatar-img">
+                  </div>
+                  <div *ngIf="productForm.value.image && !validImageUrl" >
+                    <img  src="assets/images/image-not-found.jpg" alt="No image to be shown" class="product-img img-fluid w-100 avatar-img">
+                  </div>
+                  <div *ngIf="!productForm.value.image" >
+                    <img  src="assets/images/no-image.png" alt="No image to be shown" class="product-img img-fluid w-100 avatar-img">
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+
+
+
+
+            <div [ngSwitch]="formType" class="d-flex justify-content-end" >
+              <button  *ngSwitchCase="'create'" mat-raised-button color="primary" type="submit">Create</button>
+              <button  *ngSwitchCase="'edit'" mat-raised-button color="primary" type="submit">Save</button>
+
+            </div>
+
+
           </form>
         </mat-card-content>
       </mat-card>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/core/interfaces/product';
@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,9 +20,11 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterModule],
 })
-export class ProductsTableComponent {
+export class ProductsTableComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['id', 'title', 'price', 'category', 'rating', 'image', 'actions'];
   dataSource!: MatTableDataSource<Product>;
+  private productsSub$: Subscription = new Subscription();
+
 
   pageSize = 5;
   pageIndex = 0;
@@ -45,8 +48,12 @@ export class ProductsTableComponent {
     this.loadProducts();
   }
 
+  ngOnDestroy(): void {
+    this.productsSub$.unsubscribe();
+  }
+
   loadProducts(): void {
-    this.products.index().subscribe(result => {
+    this.productsSub$ = this.products.index().subscribe(result => {
       this.dataSource.data = result;
       this.totalItems = result.length;
     });
