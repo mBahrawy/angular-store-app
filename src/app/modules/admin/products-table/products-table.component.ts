@@ -30,7 +30,6 @@ export class ProductsTableComponent implements OnInit, OnDestroy{
   pageIndex = 0;
   totalItems = 0;
 
-  @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private products: ProductsService) {}
@@ -44,7 +43,6 @@ export class ProductsTableComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Product>();
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.loadProducts();
   }
 

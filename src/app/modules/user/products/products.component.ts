@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/core/interfaces/category';
@@ -11,6 +11,9 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -36,10 +39,41 @@ export class ProductsComponent implements OnInit, OnDestroy {
   filterdProductsList: Product[] = [];
   private productsSub$: Subscription = new Subscription();
 
+  pageSize = 6;
+  pageIndex = 0;
+  totalItems = 0;
+
+  dataSource!: MatTableDataSource<Product>;
+
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
   constructor(
     private route: ActivatedRoute,
     private products: ProductsService
   ) {}
+
+  resetPagination(productsList: Product[]) {
+
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+      this.paginator.pageSize = 6;
+
+      // Update the pagination data
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      const endIndex = startIndex + this.paginator.pageSize;
+      this.filterdProductsList = productsList.slice(startIndex, endIndex);
+
+      this.dataSource.data = this.filterdProductsList;
+      this.paginator.length = productsList.length;
+      this.totalItems = productsList.length;
+    }
+  }
+
+  onPageChange(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    this.filterdProductsList = this.getFilteredProductsList().slice(startIndex, endIndex);
+  }
 
   handleFilteredCategoriesChange($event: Category[]) {
     this.filteredCategories = $event;
@@ -58,7 +92,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   handleApplyFilter() {
-    this.filterdProductsList = [...this.productsList].filter((prod) => {
+    this.filterdProductsList = this.getFilteredProductsList()
+    this.resetPagination(this.filterdProductsList);
+  }
+
+  getFilteredProductsList(): Product[] {
+    return [...this.productsList].filter((prod) => {
       return this.filteredCategories.some(
         (category) => category === prod.category
       );
@@ -68,13 +107,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProducts(): void {
     this.productsSub$ = this.products.index().subscribe((result) => {
       this.productsList = result;
-      this.handleApplyFilter();
-      if (this.isAllCategoriesChecked)
+      if (this.isAllCategoriesChecked) {
         this.filterdProductsList = [...this.productsList];
+      }
+
+      // Configure pagination
+      this.dataSource.data = this.filterdProductsList;
+      this.totalItems = this.filterdProductsList.length;
+
+      const startIndex = this.pageIndex * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.filterdProductsList = this.productsList.slice(startIndex, endIndex);
     });
   }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Product>();
+    this.dataSource.paginator = this.paginator;
+
     this.categoriesList = this.route.snapshot.data['categories']; // Access resolved categories
     this.loadProducts();
   }

@@ -31,6 +31,7 @@ const modules = [
   MatSelectModule,
   MatGridListModule,
   MatCheckboxModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

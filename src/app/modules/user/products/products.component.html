@@ -9,6 +9,12 @@
 
     <div class="col-md-9">
 
+      <div class="row">
+        <mat-paginator class="my-4" [pageSizeOptions]="[6, 12, 24, 48]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+          [length]="totalItems" (page)="onPageChange($event)">
+        </mat-paginator>
+
+      </div>
 
       <div class="row" *ngIf="productsList">
 
@@ -40,6 +46,8 @@
           </mat-card>
         </div>
       </div>
+
+
 
       <div class="row" *ngIf="productsList && !filterdProductsList.length">
         <div class="col-md-12">
