@@ -12,7 +12,8 @@
 
       <div class="row" *ngIf="productsList">
 
-        <div class="col-md-4 col-sm-3 col-12 d-flex flex-column mb-3" *ngFor="let product of filterdProductsList">
+        <div class="col-md-4 col-sm-3 col-12 d-flex flex-column mb-3" *ngFor="let product of filterdProductsList"
+          [@inOutAnimation]>
 
 
           <mat-card class="d-flex flex-column flex-grow-1">

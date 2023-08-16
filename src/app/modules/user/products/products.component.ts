@@ -4,11 +4,29 @@ import { Subscription } from 'rxjs';
 import { Category } from 'src/app/core/interfaces/category';
 import { Product } from 'src/app/core/interfaces/product';
 import { ProductsService } from 'src/app/core/services/products.service';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ scale: 0, opacity: 0 }),
+        animate('0.4s ease-out', style({ scale: 1, opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ scale: 1, opacity: 1 }),
+        animate('0.4s ease-in', style({ scale: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   categoriesList!: Category[];
