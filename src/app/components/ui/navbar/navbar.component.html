@@ -3,12 +3,9 @@
 
   <div>
     <span class="spacer"></span>
-    <a mat-button *ngIf="auth.isAuth$ | async" routerLink="/products">Products</a>
-    <a mat-button *ngIf="auth.isAuth$ | async" routerLink="/checkout">Checkout</a>
-    <ng-container *ngIf="auth.isAuth$ | async">
-      <a mat-button routerLink="/profile">Profile</a>
-      <a mat-button (click)="logout()">Logout</a>
-    </ng-container>
+    <button mat-button *ngIf="translate.currentLang=== 'en'" (click)="switchLanguage('ar')" >{{"ENGLISH" | translate}}</button>
+    <button mat-button *ngIf="translate.currentLang=== 'ar'" (click)="switchLanguage('en')" >{{"ARABIC" | translate}}</button>
+
     <ng-template *ngIf="!(auth.isAuth$ | async)" #loginTemplate>
       <a mat-button routerLink="/auth">Login</a>
     </ng-template>

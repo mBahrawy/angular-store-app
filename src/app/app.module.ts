@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpBackend, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +15,11 @@ import { AuthService } from './core/services/auth.service';
 import { HttpService } from './core/services/http.service';
 import { SharedModule } from './modules/shared/shared.module';
 
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslationModule } from './modules/translation/translation.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,6 +32,15 @@ import { SharedModule } from './modules/shared/shared.module';
       closeButton: true,
       progressBar: true,
     }),
+    TranslationModule,
+    // HttpClientModule,
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpBackend],
+    //   },
+    // }),
   ],
   providers: [
     AuthGuard,
@@ -40,3 +54,7 @@ import { SharedModule } from './modules/shared/shared.module';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
+//   return new TranslateHttpLoader(new HttpClient(httpHandler), './assets/i18n/', '.json');
+// }

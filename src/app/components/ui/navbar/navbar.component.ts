@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ export class NavbarComponent {
 
   constructor(
     public auth: AuthService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    public translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -33,4 +35,10 @@ export class NavbarComponent {
   logout(): void {
     this.auth.logout();
   }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
+    localStorage.setItem('language', language);
+  }
+
 }
