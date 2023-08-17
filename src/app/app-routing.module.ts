@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [DeAuthGuard],
   },
   {
-    path: '',
+    path: 'store',
     loadChildren: () =>
       import('./modules/user/user.module').then((m) => m.UserModule),
     canActivate: [AuthGuard, UserGuard],

@@ -65,7 +65,7 @@ export class AuthService {
 
   redirectUser(): void {
     if (!this.currentUserRole || !this.getToken()) return;
-    this.currentUserRole === UserRole.USER && this.router.navigate(['/']);
+    this.currentUserRole === UserRole.USER && this.router.navigate(['/store']);
     this.currentUserRole === UserRole.ADMIN && this.router.navigate(['/admin']);
   }
 

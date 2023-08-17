@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductViewComponent } from 'src/app/components/product-view/product-view.component';
-import { ProductsTableComponent } from './products-table/products-table.component';
-import { ProductFormComponent } from './product-form/product-form.component';
 import { CategoriesResolver } from 'src/app/core/resolvers/categories.resolver';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 const routes: Routes = [
   {
@@ -22,6 +21,9 @@ const routes: Routes = [
   {
     path: ':id',
     component: ProductViewComponent,
+    data: {
+      isShowingActions: true,
+    }
   },
   {
     path: ':id/edit',

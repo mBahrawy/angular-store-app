@@ -13,6 +13,8 @@ import { Location } from '@angular/common';
 })
 export class ProductViewComponent implements OnInit, OnDestroy {
   product!: Product;
+  isShowingActions!: boolean;
+
   private productSub$: Subscription = new Subscription();
 
   constructor(
@@ -34,6 +36,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    this.isShowingActions = this.route.snapshot.data['isShowingActions'] || false;
     if (id) {
       this.productSub$ = this.products.single(id).subscribe((product) => {
         this.product = product;
