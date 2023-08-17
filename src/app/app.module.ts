@@ -19,7 +19,6 @@ import { SharedModule } from './modules/shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
-import { TranslationModule } from './modules/translation/translation.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -32,15 +31,15 @@ import { TranslationModule } from './modules/translation/translation.module';
       closeButton: true,
       progressBar: true,
     }),
-    TranslationModule,
-    // HttpClientModule,
-    // TranslateModule.forRoot({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: HttpLoaderFactory,
-    //     deps: [HttpBackend],
-    //   },
-    // }),
+    // TranslationModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpBackend],
+      },
+    }),
   ],
   providers: [
     AuthGuard,
@@ -55,6 +54,6 @@ import { TranslationModule } from './modules/translation/translation.module';
 })
 export class AppModule {}
 
-// export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
-//   return new TranslateHttpLoader(new HttpClient(httpHandler), './assets/i18n/', '.json');
-// }
+export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
+  return new TranslateHttpLoader(new HttpClient(httpHandler), './assets/i18n/', '.json');
+}

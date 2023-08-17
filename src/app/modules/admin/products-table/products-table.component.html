@@ -8,7 +8,6 @@
   </div>
   <div class="row" [ngStyle]="{display: dataSource.data.length ? 'block' :'none'}">
     <div class="col-12">
-      {{ 'Add' | translate }}
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <!-- ID Column -->
@@ -63,15 +62,15 @@
 
             <div class="d-flex">
               <button class="p-0 m-0" (click)="delete(product.id)" mat-icon-button color="warn"
-              [attr.aria-label]="'Delete' | translate">
+                [attr.aria-label]="'Delete' | translate">
                 <mat-icon>delete</mat-icon>
               </button>
               <button class="p-0 m-0" [routerLink]="[product.id]" mat-icon-button color="primary"
-              [attr.aria-label]="'View' | translate">
+                [attr.aria-label]="'View' | translate">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
               <button class="p-0 m-0" [routerLink]="[product.id + '/edit']" mat-icon-button color="primary"
-              [attr.aria-label]="'Edit' | translate">
+                [attr.aria-label]="'Edit' | translate">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>

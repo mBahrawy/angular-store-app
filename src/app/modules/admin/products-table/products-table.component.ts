@@ -1,25 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/core/interfaces/product';
 import { ProductsService } from 'src/app/core/services/products.service';
 
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
-import { TranslationModule } from '../../translation/translation.module';
 
 
 @Component({
   selector: 'app-products-table',
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.scss'],
-  standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterModule, TranslationModule],
 })
 export class ProductsTableComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['id', 'title', 'price', 'category', 'rating', 'image', 'actions'];

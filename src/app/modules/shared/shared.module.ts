@@ -1,16 +1,20 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ProductViewComponent } from 'src/app/components/product-view/product-view.component';
+import { DeleteProductModalComponent } from 'src/app/components/ui/delete-product-modal/delete-product-modal.component';
 import { LoaderComponent } from 'src/app/components/ui/loader/loader.component';
 import { NavbarComponent } from 'src/app/components/ui/navbar/navbar.component';
 import { NotFoundComponent } from 'src/app/components/views/not-found/not-found.component';
-import { MaterialModule } from '../material/material.module';
-import { ProductViewComponent } from 'src/app/components/product-view/product-view.component';
-import { DeleteProductModalComponent } from 'src/app/components/ui/delete-product-modal/delete-product-modal.component';
 import { TruncatePipe } from 'src/app/core/pipes/truncate.pipe';
+import { MaterialModule } from '../material/material.module';
+import {
+  HttpBackend,
+  HttpClientModule
+} from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
 
 const modules = [
   MaterialModule,
@@ -19,7 +23,6 @@ const modules = [
   ReactiveFormsModule,
   RouterModule,
   HttpClientModule,
-  TranslateModule
 ];
 
 const componenets = [
@@ -35,7 +38,16 @@ const pipes = [
 ]
 @NgModule({
   declarations: [...componenets, ...pipes],
-  imports: [modules],
+  imports: [...modules,
+   HttpClientModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpBackend],
+      },
+    }),
+  ],
   providers: [],
   exports: [...modules, ...componenets, ...pipes],
 })
