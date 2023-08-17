@@ -6,11 +6,11 @@
       <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/admin']">{{"All Products" | translate}}</a>
       <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/admin/new']">{{"Add new product" | translate}}</a>
       <a *ngIf="auth.isAuth$ | async" mat-button (click)="logout()">{{"Logout" | translate}}</a>
-      <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
-      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
+      <span class="mx-1" *ngIf="auth.isAuth$ | async"> |</span>
+      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">
         EN</button>
-      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
-        للعربي </button>
+      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">
+        عربي </button>
     </div>
   </mat-toolbar>
 </ng-container>
@@ -23,11 +23,11 @@
     <div>
       <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/store']">{{"All Products" | translate}}</a>
       <a *ngIf="auth.isAuth$ | async" mat-button (click)="logout()">{{"Logout" | translate}}</a>
-      <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
-      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
+      <span class="mx-1" *ngIf="auth.isAuth$ | async"> |</span>
+      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">
         EN</button>
-      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
-        للعربي </button>
+      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">
+        عربي </button>
     </div>
   </mat-toolbar>
 
