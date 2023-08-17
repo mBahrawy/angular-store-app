@@ -49,7 +49,7 @@ export class ProductsTableComponent implements OnInit, OnDestroy{
     });
   }
 
-  onPageChange(event: any): void {
+  onPageChange(event): void {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
     this.loadProducts();
