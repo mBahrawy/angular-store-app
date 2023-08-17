@@ -1,18 +1,34 @@
-<mat-toolbar color="primary" class="d-fle justify-content-between">
-  <span>{{ "Angular store" | translate}}</span>
+<!-- If the user has role is admin -->
+<ng-container *ngIf="auth.isAdmin(); else userNavbar">
+  <mat-toolbar color="primary" class="d-fle justify-content-between">
+    <span>{{ "Angular store" | translate}}</span>
+    <div>
+      <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/admin']">{{"All Products" | translate}}</a>
+      <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/admin/new']">{{"Add new product" | translate}}</a>
+      <a *ngIf="auth.isAuth$ | async" mat-button (click)="logout()">{{"Logout" | translate}}</a>
+      <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
+      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
+        EN</button>
+      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
+        للعربي </button>
+    </div>
+  </mat-toolbar>
+</ng-container>
 
-  <div>
-    <span class="spacer"></span>
-    <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
-      EN</button>
-    <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
-      للعربي </button>
 
+<!-- If the user has role is regualr -->
+<ng-template #userNavbar>
+  <mat-toolbar color="primary" class="d-fle justify-content-between">
+    <span>{{ "Angular store" | translate}}</span>
+    <div>
+      <a *ngIf="auth.isAuth$ | async" mat-button [routerLink]="['/store']">{{"All Products" | translate}}</a>
+      <a *ngIf="auth.isAuth$ | async" mat-button (click)="logout()">{{"Logout" | translate}}</a>
+      <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
+      <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
+        EN</button>
+      <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
+        للعربي </button>
+    </div>
+  </mat-toolbar>
 
-    <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
-
-    <ng-container *ngIf="auth.isAuth$ | async">
-      <a mat-button (click)="logout()">{{"Logout" | translate}}</a>
-    </ng-container>
-  </div>
-</mat-toolbar>
+</ng-template>

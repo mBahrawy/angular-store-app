@@ -30,8 +30,9 @@ import { HttpClient } from '@angular/common/http';
       timeOut: 5000,
       closeButton: true,
       progressBar: true,
+      positionClass: "toast-top-center"
+
     }),
-    // TranslationModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

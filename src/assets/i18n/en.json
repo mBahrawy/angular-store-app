@@ -49,5 +49,19 @@
   "Product description": "Product description",
   "reviews": "reviews",
 
-  "Items per page:": "Items per page:"
+  "Items per page:": "Items per page:",
+
+  "Product": "Product",
+  "Products": "Products",
+  "New product": "New product",
+
+  "All Products": "All Products",
+  "Add new product":  "Add new product",
+
+  "Product created successfully": "Product created successfully",
+  "Product edited successfully": "Product edited successfully",
+  "Product deleted successfully": "Product deleted successfully",
+
+  "Are you sure you want to delete this item?": "Are you sure you want to delete this item?",
+  "Cancel": "Cancel"
 }

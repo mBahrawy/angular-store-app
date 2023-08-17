@@ -10,6 +10,7 @@ import { regex } from 'src/app/core/helpers/regex';
 import { Category } from 'src/app/core/interfaces/category';
 import { Product, ProductFormData } from 'src/app/core/interfaces/product';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 
 type FormType = 'create' | 'edit';
@@ -40,7 +41,8 @@ export class ProductFormComponent implements OnInit {
     private products: ProductsService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public localize : LocalizationService
   ) {}
 
   handleBack() {

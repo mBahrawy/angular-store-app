@@ -9,8 +9,8 @@ import { User, UserRole } from '../interfaces/user';
 })
 export class AuthService {
   isAuth$!: BehaviorSubject<boolean>;
-  private currentUser!: User | null;
-  private currentUserRole!: UserRole | null;
+  role$!: BehaviorSubject<UserRole | null>;
+
   private users: User[] = [
     {
       username: 'user',
@@ -25,7 +25,12 @@ export class AuthService {
   constructor(private toastr: ToastrService, private router: Router) {
     // Initialize auth state
     this.isAuth$ = new BehaviorSubject<boolean>(!!this.getToken());
-    this.getRole() && (this.currentUserRole = this.getRole());
+    this.role$ = new BehaviorSubject<UserRole | null>(this.getRole());
+  }
+
+
+  isAdmin(): boolean {
+    return this.role$.value === UserRole.ADMIN;
   }
 
   getUserRole(username: string): UserRole | null {
@@ -52,21 +57,21 @@ export class AuthService {
       return { success: false };
     }
 
-    this.currentUserRole = this.getUserRole(username);
+    const currentUserRole = this.getUserRole(username);
 
     this.isAuth$.next(true);
-    this.currentUser = this.getUser(username);
+    this.role$.next(currentUserRole);
     this.setToken('TOKEN');
-    this.currentUserRole && this.setRole(this.currentUserRole);
+    currentUserRole && this.setRole(currentUserRole);
 
     this.redirectUser();
-    return { success: true, userRole: this.currentUserRole };
+    return { success: true, userRole: currentUserRole };
   }
 
   redirectUser(): void {
-    if (!this.currentUserRole || !this.getToken()) return;
-    this.currentUserRole === UserRole.USER && this.router.navigate(['/store']);
-    this.currentUserRole === UserRole.ADMIN && this.router.navigate(['/admin']);
+    if (!this.role$.value || !this.getToken()) return;
+    this.role$.value === UserRole.USER && this.router.navigate(['/store']);
+    this.role$.value === UserRole.ADMIN && this.router.navigate(['/admin']);
   }
 
   setToken(t: string): void {

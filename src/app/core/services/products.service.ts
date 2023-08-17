@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { DeleteProductModalComponent } from 'src/app/components/ui/delete-product-modal/delete-product-modal.component';
 import { Product, ProductFormData } from '../interfaces/product';
 import { HttpService } from './http.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class ProductsService {
     private http: HttpService,
     private dialog: MatDialog,
     private toaster: ToastrService,
+    private translate: TranslateService,
   ) {}
 
   openDeleteModal(productId: number, callback: () => void): void {
@@ -31,11 +33,11 @@ export class ProductsService {
   }
 
   new(product: ProductFormData): Observable<Product> {
-    return this.http.postRequest<Product>(`products`, product).pipe(tap(() => this.toaster.success('Product created successfully')));
+    return this.http.postRequest<Product>(`products`, product).pipe(tap(() => this.toaster.success(this.translate.instant("Product created successfully"))));
   }
 
   edit(id: number, product: ProductFormData): Observable<Product> {
-    return this.http.putRequest<Product>(`products/${id}`, product).pipe(tap(() => this.toaster.success('Product edited successfully')));
+    return this.http.putRequest<Product>(`products/${id}`, product).pipe(tap(() => this.toaster.success(this.translate.instant("Product edited successfully"))));
   }
 
 
@@ -44,6 +46,6 @@ export class ProductsService {
   }
 
   destroy(id: number): Observable<Product> {
-    return this.http.deleteRequest<Product>(`products/${id}`).pipe(tap(() => this.toaster.success('Product deleted successfully')));;
+    return this.http.deleteRequest<Product>(`products/${id}`).pipe(tap(() => this.toaster.success(this.translate.instant("Product deleted successfully"))));;
   }
 }
