@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {
+  Subject,
+  Subscription,
+  debounceTime,
+  distinctUntilChanged,
+} from 'rxjs';
 import { Category } from 'src/app/core/interfaces/category';
 import { Product } from 'src/app/core/interfaces/product';
 import { ProductsService } from 'src/app/core/services/products.service';
@@ -37,7 +42,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isAllCategoriesChecked: boolean = true;
   productsList!: Product[];
   filterdProductsList: Product[] = [];
+  searchedAndFilteredProductsList: Product[] = [];
   private productsSub$: Subscription = new Subscription();
+
+  searchValue: string = '';
+  searchValue$ = new Subject<string>();
 
   pageSize = 6;
   pageIndex = 0;
@@ -52,8 +61,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private products: ProductsService
   ) {}
 
-  resetPagination(productsList: Product[]) {
 
+  handleClearSearch() {
+    this.searchValue$.next('');
+    this.searchValue = '';
+  }
+
+  handleApplySearch(searchValue: string) {
+    this.filterdProductsList = this.getFilteredProductsList().filter(product => {
+      return product.title.toLowerCase().includes(searchValue.toLowerCase());
+    })
+  }
+
+  resetPagination(productsList: Product[]) {
     if (this.paginator) {
       this.paginator.pageIndex = 0;
       this.paginator.pageSize = 6;
@@ -72,7 +92,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onPageChange(event: PageEvent) {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
-    this.filterdProductsList = this.getFilteredProductsList().slice(startIndex, endIndex);
+    this.filterdProductsList = this.getFilteredProductsList().slice(
+      startIndex,
+      endIndex
+    );
   }
 
   handleFilteredCategoriesChange($event: Category[]) {
@@ -92,7 +115,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   handleApplyFilter() {
-    this.filterdProductsList = this.getFilteredProductsList()
+    this.filterdProductsList = this.getFilteredProductsList();
     this.resetPagination(this.filterdProductsList);
   }
 
@@ -127,6 +150,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.categoriesList = this.route.snapshot.data['categories']; // Access resolved categories
     this.loadProducts();
+
+    // Debounced product search setup
+    this.searchValue$
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((value) => {
+        this.handleApplySearch(value);
+      });
   }
 
   ngOnDestroy(): void {

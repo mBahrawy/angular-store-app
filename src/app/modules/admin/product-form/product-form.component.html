@@ -51,35 +51,23 @@
 
                         <mat-option *ngFor="let category of categoriesList" [value]="category"><span
                             class="text-capitalize">{{category}}</span> </mat-option>
-
                       </mat-select>
                       <mat-error>Please select a category</mat-error>
-
                     </mat-form-field>
-
                   </div>
 
-
                     <div class="col-md-12 mb-2">
-
-
                       <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Image URL</mat-label>
                         <input (input)="onImageUrlChange()" matInput formControlName="image" required>
                         <mat-error *ngIf="productForm.get('image')?.hasError('required')">Please add a product image url</mat-error>
                         <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">Please add a valid product image url</mat-error>
                       </mat-form-field>
-
-
-
                     </div>
                 </div>
-
               </div>
 
-
                 <div class="col-md-6 mb-3">
-
                   <div *ngIf="productForm.value.image && validImageUrl" >
                     <img [src]="productForm.get('image')?.value" (error)="handleImageError()" [alt]="productForm.value.title" class="product-img img-fluid w-100 avatar-img">
                   </div>
@@ -89,23 +77,13 @@
                   <div *ngIf="!productForm.value.image" >
                     <img  src="assets/images/no-image.png" alt="No image to be shown" class="product-img img-fluid w-100 avatar-img">
                   </div>
-
-
-
-
                 </div>
               </div>
-
-
-
-
 
             <div [ngSwitch]="formType" class="d-flex justify-content-end" >
               <button  *ngSwitchCase="'create'" mat-raised-button color="primary" type="submit">Create</button>
               <button  *ngSwitchCase="'edit'" mat-raised-button color="primary" type="submit">Save</button>
-
             </div>
-
 
           </form>
         </mat-card-content>

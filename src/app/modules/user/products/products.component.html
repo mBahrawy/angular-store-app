@@ -10,10 +10,29 @@
     <div class="col-md-9">
 
       <!-- <div class="row"> -->
-      <div class="row" [ngStyle]="{display: filterdProductsList.length ? 'block' :'none'}">
-        <mat-paginator class="my-4" [pageSizeOptions]="[6, 12, 24, 48]" [pageSize]="pageSize" [pageIndex]="pageIndex"
-          [length]="totalItems" (page)="onPageChange($event)">
-        </mat-paginator>
+      <div class="row d-flex justify-content-between"
+        [ngStyle]="{display: filterdProductsList.length ? 'block' :'none'}">
+
+
+
+        <div class="col-auto p-0">
+
+          <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="this.searchValue$.next($event)">
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+              (click)="handleClearSearch()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field></div>
+          <div class="col-auto p-0">
+
+          <mat-paginator class="p-0" [pageSizeOptions]="[6, 12, 24, 48]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+            [length]="totalItems" (page)="onPageChange($event)">
+          </mat-paginator>
+
+   </div>
+
 
       </div>
 
@@ -21,7 +40,6 @@
 
         <div class="col-md-4 col-sm-3 col-12 d-flex flex-column mb-3" *ngFor="let product of filterdProductsList"
           [@inOutAnimation]>
-
 
           <mat-card class="d-flex flex-column flex-grow-1">
             <mat-card-header>
@@ -42,30 +60,17 @@
             <mat-card-actions class="d-flex justify-content-between">
               <h4 class="mb-1 ms-1"><b>Price: </b>{{product.price | currency}}</h4>
               <button [routerLink]="[product.id]" mat-raised-button color="primary">View</button>
-              <!-- <button mat-raised-button color="primary">View</button> -->
 
             </mat-card-actions>
           </mat-card>
         </div>
       </div>
 
-
-
       <div class="row" *ngIf="productsList && !filterdProductsList.length">
         <div class="col-md-12">
           <h2 class="text-center mt-5">No products to be shown.</h2>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
 
     </div>
   </div>
