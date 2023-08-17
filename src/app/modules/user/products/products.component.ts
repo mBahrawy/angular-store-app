@@ -61,16 +61,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private products: ProductsService
   ) {}
 
-
   handleClearSearch() {
     this.searchValue$.next('');
     this.searchValue = '';
   }
 
   handleApplySearch(searchValue: string) {
-    this.filterdProductsList = this.getFilteredProductsList().filter(product => {
-      return product.title.toLowerCase().includes(searchValue.toLowerCase());
-    })
+    this.filterdProductsList = this.getFilteredProductsList().filter(
+      (product) => {
+        return product.title.toLowerCase().includes(searchValue.toLowerCase());
+      }
+    );
   }
 
   resetPagination(productsList: Product[]) {
@@ -92,10 +93,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onPageChange(event: PageEvent) {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
+
     this.filterdProductsList = this.getFilteredProductsList().slice(
       startIndex,
       endIndex
     );
+
+    console.log(this.filterdProductsList);
   }
 
   handleFilteredCategoriesChange($event: Category[]) {
@@ -149,6 +153,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
 
     this.categoriesList = this.route.snapshot.data['categories']; // Access resolved categories
+
+    if (this.isAllCategoriesChecked) {
+      this.filteredCategories = [...this.categoriesList];
+    }
+
     this.loadProducts();
 
     // Debounced product search setup

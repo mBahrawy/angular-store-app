@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container my-5">
   <div class="row">
     <div class="col-md-3">
       <app-products-sidebar [allCategories]="categoriesList" [filteredCategories]="filteredCategories"
@@ -6,6 +6,8 @@
         [isAllCategoriesChecked]="isAllCategoriesChecked"
         (isAllCategoriesCheckedChange)="handleIsAllCategoriesCheckedChange($event)"></app-products-sidebar>
     </div>
+
+
 
     <div class="col-md-9">
 
@@ -15,23 +17,22 @@
 
 
 
-        <div class="col-auto p-0">
-
-          <mat-form-field>
-            <mat-label>Search</mat-label>
+        <div class="col p-0">
+          <mat-form-field class="w-100">
+            <mat-label>Search for product</mat-label>
             <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="this.searchValue$.next($event)">
-            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
-              (click)="handleClearSearch()">
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="handleClearSearch()">
               <mat-icon>close</mat-icon>
             </button>
-          </mat-form-field></div>
-          <div class="col-auto p-0">
+          </mat-form-field>
+        </div>
 
+
+        <div class="col-auto p-0">
           <mat-paginator class="p-0" [pageSizeOptions]="[6, 12, 24, 48]" [pageSize]="pageSize" [pageIndex]="pageIndex"
             [length]="totalItems" (page)="onPageChange($event)">
           </mat-paginator>
-
-   </div>
+        </div>
 
 
       </div>
