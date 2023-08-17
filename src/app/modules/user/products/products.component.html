@@ -7,19 +7,13 @@
         (isAllCategoriesCheckedChange)="handleIsAllCategoriesCheckedChange($event)"></app-products-sidebar>
     </div>
 
-
-
     <div class="col-md-9">
-
-      <!-- <div class="row"> -->
       <div class="row d-flex justify-content-between"
         [ngStyle]="{display: filterdProductsList.length ? 'block' :'none'}">
 
-
-
         <div class="col p-0">
           <mat-form-field class="w-100">
-            <mat-label>Search for product</mat-label>
+            <mat-label>{{ 'Search for product' | translate }}</mat-label>
             <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="this.searchValue$.next($event)">
             <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="handleClearSearch()">
               <mat-icon>close</mat-icon>
@@ -27,14 +21,11 @@
           </mat-form-field>
         </div>
 
-
         <div class="col-auto p-0">
           <mat-paginator class="p-0" [pageSizeOptions]="[6, 12, 24, 48]" [pageSize]="pageSize" [pageIndex]="pageIndex"
             [length]="totalItems" (page)="onPageChange($event)">
           </mat-paginator>
         </div>
-
-
       </div>
 
       <div class="row" *ngIf="productsList">
@@ -44,24 +35,23 @@
 
           <mat-card class="d-flex flex-column flex-grow-1">
             <mat-card-header>
-              <mat-card-title>{{product.title}}</mat-card-title>
-              <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+              <mat-card-title>{{ product.title | truncate: 40}}</mat-card-title>
+              <mat-card-subtitle>{{ product.category | translate }}</mat-card-subtitle>
             </mat-card-header>
             <img class="product-image" mat-card-image [src]="product.image" [alt]="product.title">
             <mat-card-content class="d-flex flex-column flex-grow-1">
               <p class="flex-grow-1">
-                {{product.description | truncate: 150}}
+                {{ product.description | truncate: 150 }}
               </p>
 
-              <h4 class="mb-1"><b>Rating: </b>{{product.rating.rate}}/5</h4>
-              <h4 class="mb-1"><b>Stock: </b>{{product.rating.count}}</h4>
+              <h4 class="mb-1"><b>{{ 'Rating' | translate }}: </b>{{ product.rating.rate }}/5</h4>
+              <h4 class="mb-1"><b>{{ 'Stock' | translate }}: </b>{{ product.rating.count }}</h4>
 
             </mat-card-content>
             <mat-divider class="mt-2"></mat-divider>
             <mat-card-actions class="d-flex justify-content-between">
-              <h4 class="mb-1 ms-1"><b>Price: </b>{{product.price | currency}}</h4>
-              <button [routerLink]="[product.id]" mat-raised-button color="primary">View</button>
-
+              <h4 class="mb-1 ms-1"><b>{{ 'Price' | translate }}: </b>{{ product.price | currency }}</h4>
+              <button [routerLink]="[product.id]" mat-raised-button color="primary">{{ 'View' | translate }}</button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -69,10 +59,9 @@
 
       <div class="row" *ngIf="productsList && !filterdProductsList.length">
         <div class="col-md-12">
-          <h2 class="text-center mt-5">No products to be shown.</h2>
+          <h2 class="text-center mt-5">{{ 'No products to be shown.' | translate }}</h2>
         </div>
       </div>
-
     </div>
   </div>
 </div>

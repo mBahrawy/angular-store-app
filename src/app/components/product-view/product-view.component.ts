@@ -5,6 +5,7 @@ import { Product } from 'src/app/core/interfaces/product';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { Location } from '@angular/common';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 
 @Component({
   selector: 'app-product-view',
@@ -21,7 +22,8 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     private products: ProductsService,
     private route: ActivatedRoute,
     private auth: AuthService,
-    private location: Location
+    private location: Location,
+    public localize : LocalizationService
   ) {}
 
   handleBack() {

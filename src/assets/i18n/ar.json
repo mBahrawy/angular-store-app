@@ -1,5 +1,51 @@
 {
-  "HELLO": "اهلا بك",
-  "ARABIC": "العربية",
-  "ENGLISH": "الانجليزية"
+  "Angular store": "متجر الانجولار",
+  "Login": "تسجيل الدخول",
+  "Logout": "تسجيل الخروج",
+
+  "User name": "اسم المستخدم",
+  "Password": "كلمة المرور",
+  "Please enter username": "يرجى إدخال اسم المستخدم",
+  "Please enter a valid username": "يرجى إدخال اسم مستخدم صالح",
+  "Please enter password": "يرجى إدخال كلمة المرور",
+
+  "Search for product": "البحث عن المنتج",
+  "Rating": "التقييم",
+  "Stock": "المخزون",
+  "Price": "السعر",
+  "View": "عرض",
+  "No products to be shown.": "لا يوجد منتجات للعرض.",
+
+  "Add": "إضافة",
+  "Create new product": "إنشاء منتج جديد",
+  "Title": "العنوان",
+  "Category": "الفئة",
+  "Image": "الصورة",
+  "Action": "الإجراء",
+  "Delete": "حذف",
+  "Edit": "تعديل",
+  "Product Image": "صورة المنتج",
+
+  "Back": "العودة",
+  "Add a new product": "إضافة منتج جديد",
+  "Edit product": "تعديل المنتج",
+  "Product form": "نموذج المنتج",
+  "Description": "الوصف",
+  "Please enter a product title": "يرجى إدخال عنوان المنتج",
+  "Please enter a product price": "يرجى إدخال سعر المنتج",
+  "Product description is too short": "وصف المنتج قصير جدًا",
+  "Product description is too long": "وصف المنتج طويل جدًا",
+  "Please select a category": "يرجى اختيار فئة",
+  "Image URL": "رابط الصورة",
+  "Please add a product image URL": "يرجى إضافة رابط صورة المنتج",
+  "Please add a valid product image URL": "يرجى إضافة رابط صورة منتج صالح",
+  "No image to be shown": "لا يوجد صورة للعرض",
+  "Create": "إنشاء",
+  "Save": "حفظ",
+
+  "Filter products": "تصفية المنتجات",
+  "All categories": "جميع التصنيفات",
+
+  "Product description": "وصف المنتج",
+  "reviews": "تقييمات"
 }

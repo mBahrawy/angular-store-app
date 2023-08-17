@@ -3,15 +3,13 @@
     <div class="col-md-12">
       <mat-card class="product-card">
         <mat-card-header class="mb-3 d-flex">
-          <button (click)="handleBack()" mat-icon-button color="primary" aria-label="Back">
+          <button (click)="handleBack()" mat-icon-button color="primary" [attr.aria-label]="'Back' | translate ">
             <mat-icon>keyboard_arrow_left</mat-icon>
           </button>
           <div [ngSwitch]="formType" class="d-flex align-items-center">
-
-            <mat-card-title *ngSwitchCase="'create'">Add an new product</mat-card-title>
-            <mat-card-title *ngSwitchCase="'edit'">Edit product</mat-card-title>
-            <mat-card-title *ngSwitchDefault>Product form</mat-card-title>
-
+            <mat-card-title *ngSwitchCase="'create'">{{ 'Add a new product' | translate }}</mat-card-title>
+            <mat-card-title *ngSwitchCase="'edit'">{{ 'Edit product' | translate }}</mat-card-title>
+            <mat-card-title *ngSwitchDefault>{{ 'Product form' | translate }}</mat-card-title>
           </div>
         </mat-card-header>
         <mat-card-content>
@@ -23,66 +21,61 @@
                 <div class="row">
                   <div class="col-md-12 mb-2">
                     <mat-form-field class="w-100" appearance="fill">
-                      <mat-label>Title</mat-label>
+                      <mat-label>{{ 'Title' | translate }}</mat-label>
                       <input matInput formControlName="title" required>
-                      <mat-error>Please enter a product title</mat-error>
+                      <mat-error>{{ 'Please enter a product title' | translate }}</mat-error>
                     </mat-form-field>
 
                   </div>
                   <div class="col-md-12 mb-2"> <mat-form-field class="w-100" appearance="fill">
-                      <mat-label>Price</mat-label>
+                      <mat-label>{{ 'Price' | translate }}</mat-label>
                       <input matInput type="number" formControlName="price" required>
-                      <mat-error>Please enter a product price</mat-error>
-
+                      <mat-error>{{ 'Please enter a product price' | translate }}</mat-error>
                     </mat-form-field></div>
                   <div class="col-md-12 mb-2"> <mat-form-field class="w-100" appearance="fill">
-                      <mat-label>Description</mat-label>
+                      <mat-label>{{ 'Description' | translate }}</mat-label>
                       <textarea matInput formControlName="description" required></textarea>
-
-                      <mat-error *ngIf="productForm.get('description')?.hasError('required')">Please enter a product description</mat-error>
-                      <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">Product description is too short</mat-error>
-                      <mat-error *ngIf="productForm.get('description')?.hasError('maxlength')">Product description is too long</mat-error>
+                      <mat-error *ngIf="productForm.get('description')?.hasError('required')">{{ 'Please enter a product description' | translate }}</mat-error>
+                      <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">{{ 'Product description is too short' | translate }}</mat-error>
+                      <mat-error *ngIf="productForm.get('description')?.hasError('maxlength')">{{ 'Product description is too long' | translate }}</mat-error>
                     </mat-form-field></div>
                   <div class="col-md-12 mb-2">
-
                     <mat-form-field *ngIf="categoriesList" class="w-100" appearance="fill">
-                      <mat-label>Category</mat-label>
+                      <mat-label>{{ 'Category' | translate }}</mat-label>
                       <mat-select formControlName="category" required>
-
-                        <mat-option *ngFor="let category of categoriesList" [value]="category"><span
-                            class="text-capitalize">{{category}}</span> </mat-option>
+                        <mat-option *ngFor="let category of categoriesList" [value]="category"><span class="text-capitalize">{{category}}</span></mat-option>
                       </mat-select>
-                      <mat-error>Please select a category</mat-error>
+                      <mat-error>{{ 'Please select a category' | translate }}</mat-error>
                     </mat-form-field>
                   </div>
 
-                    <div class="col-md-12 mb-2">
-                      <mat-form-field class="w-100" appearance="fill">
-                        <mat-label>Image URL</mat-label>
-                        <input (input)="onImageUrlChange()" matInput formControlName="image" required>
-                        <mat-error *ngIf="productForm.get('image')?.hasError('required')">Please add a product image url</mat-error>
-                        <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">Please add a valid product image url</mat-error>
-                      </mat-form-field>
-                    </div>
-                </div>
-              </div>
-
-                <div class="col-md-6 mb-3">
-                  <div *ngIf="productForm.value.image && validImageUrl" >
-                    <img [src]="productForm.get('image')?.value" (error)="handleImageError()" [alt]="productForm.value.title" class="product-img img-fluid w-100 avatar-img">
-                  </div>
-                  <div *ngIf="productForm.value.image && !validImageUrl" >
-                    <img  src="assets/images/image-not-found.jpg" alt="No image to be shown" class="product-img img-fluid w-100 avatar-img">
-                  </div>
-                  <div *ngIf="!productForm.value.image" >
-                    <img  src="assets/images/no-image.png" alt="No image to be shown" class="product-img img-fluid w-100 avatar-img">
+                  <div class="col-md-12 mb-2">
+                    <mat-form-field class="w-100" appearance="fill">
+                      <mat-label>{{ 'Image URL' | translate }}</mat-label>
+                      <input (input)="onImageUrlChange()" matInput formControlName="image" required>
+                      <mat-error *ngIf="productForm.get('image')?.hasError('required')">{{ 'Please add a product image URL' | translate }}</mat-error>
+                      <mat-error *ngIf="productForm.get('image')?.hasError('pattern')">{{ 'Please add a valid product image URL' | translate }}</mat-error>
+                    </mat-form-field>
                   </div>
                 </div>
               </div>
 
-            <div [ngSwitch]="formType" class="d-flex justify-content-end" >
-              <button  *ngSwitchCase="'create'" mat-raised-button color="primary" type="submit">Create</button>
-              <button  *ngSwitchCase="'edit'" mat-raised-button color="primary" type="submit">Save</button>
+              <div class="col-md-6 mb-3">
+                <div *ngIf="productForm.value.image && validImageUrl">
+                  <img [src]="productForm.get('image')?.value" (error)="handleImageError()" [alt]="productForm.value.title" class="product-img img-fluid w-100 avatar-img">
+                </div>
+                <div *ngIf="productForm.value.image && !validImageUrl">
+                  <img src="assets/images/image-not-found.jpg" alt="{{ 'No image to be shown' | translate }}" class="product-img img-fluid w-100 avatar-img">
+                </div>
+                <div *ngIf="!productForm.value.image">
+                  <img src="assets/images/no-image.png" alt="{{ 'No image to be shown' | translate }}" class="product-img img-fluid w-100 avatar-img">
+                </div>
+              </div>
+            </div>
+
+            <div [ngSwitch]="formType" class="d-flex justify-content-end">
+              <button *ngSwitchCase="'create'" mat-raised-button color="primary" type="submit">{{ 'Create' | translate }}</button>
+              <button *ngSwitchCase="'edit'" mat-raised-button color="primary" type="submit">{{ 'Save' | translate }}</button>
             </div>
 
           </form>

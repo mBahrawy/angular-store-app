@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent {
     public auth: AuthService,
     private breakpointObserver: BreakpointObserver,
     public translate: TranslateService,
+    public localizService: LocalizationService
   ) {}
 
   ngOnInit(): void {
@@ -35,10 +37,4 @@ export class NavbarComponent {
   logout(): void {
     this.auth.logout();
   }
-
-  switchLanguage(language: string) {
-    this.translate.use(language);
-    localStorage.setItem('language', language);
-  }
-
 }

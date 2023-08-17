@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from './core/services/localization.service';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +9,23 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
-  setDefaultLanguage(language: string = 'en') {
-    this.translate.setDefaultLang(language);
-    this.translate.use(language);
-    localStorage.setItem('language', language);
-  }
 
-  constructor(public translate: TranslateService) {
+  constructor(
+    public translate: TranslateService,
+    localizService: LocalizationService
+  ) {
     const storedLanguage: string | null = localStorage.getItem('language');
     if (
       !storedLanguage ||
       !(storedLanguage === 'en' || storedLanguage === 'ar')
     ) {
-      this.setDefaultLanguage();
+      localizService.setDefaultLanguage();
       return;
     }
-    this.setDefaultLanguage(storedLanguage);
-  }
-  switchLanguage(language: string) {
-    this.translate.use(language);
-    localStorage.setItem('language', language);
+    localizService.setDefaultLanguage(storedLanguage);
+
+    storedLanguage === 'ar'
+      ? localizService.changeDirectionToRtl()
+      : localizService.changeDirectionToLtr();
   }
 }

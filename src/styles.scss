@@ -1,3 +1,7 @@
+html[dir="rtl"] {
+  direction: rtl;
+}
+
 body {
   display: flex;
   flex-direction: column;

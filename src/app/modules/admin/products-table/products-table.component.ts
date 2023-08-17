@@ -11,6 +11,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TranslationModule } from '../../translation/translation.module';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.scss'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterModule, TranslationModule],
 })
 export class ProductsTableComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['id', 'title', 'price', 'category', 'rating', 'image', 'actions'];

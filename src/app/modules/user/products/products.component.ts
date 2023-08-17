@@ -99,7 +99,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       endIndex
     );
 
-    console.log(this.filterdProductsList);
   }
 
   handleFilteredCategoriesChange($event: Category[]) {

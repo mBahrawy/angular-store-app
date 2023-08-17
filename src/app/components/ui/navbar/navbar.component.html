@@ -1,13 +1,18 @@
 <mat-toolbar color="primary" class="d-fle justify-content-between">
-  <span>Angular Store</span>
+  <span>{{ "Angular store" | translate}}</span>
 
   <div>
     <span class="spacer"></span>
-    <button mat-button *ngIf="translate.currentLang=== 'en'" (click)="switchLanguage('ar')" >{{"ENGLISH" | translate}}</button>
-    <button mat-button *ngIf="translate.currentLang=== 'ar'" (click)="switchLanguage('en')" >{{"ARABIC" | translate}}</button>
+    <button mat-button *ngIf="translate.currentLang === 'ar'" (click)="localizService.switchLanguage('en')">Switch to
+      EN</button>
+    <button mat-button *ngIf="translate.currentLang === 'en'" (click)="localizService.switchLanguage('ar')">التحويل
+      للعربي </button>
 
-    <ng-template *ngIf="!(auth.isAuth$ | async)" #loginTemplate>
-      <a mat-button routerLink="/auth">Login</a>
-    </ng-template>
+
+    <span class="mx-2" *ngIf="auth.isAuth$ | async"> |</span>
+
+    <ng-container *ngIf="auth.isAuth$ | async">
+      <a mat-button (click)="logout()">{{"Logout" | translate}}</a>
+    </ng-container>
   </div>
 </mat-toolbar>

@@ -1,15 +1,14 @@
 <div class="container-fluid container-lg my-5">
   <div class="row">
     <div class="col-12 d-flex mb-3 justify-content-end">
-      <button [routerLink]="['new']" mat-raised-button color="primary" aria-label="Add">
-        Create new product <mat-icon>add</mat-icon>
+      <button [routerLink]="['new']" mat-raised-button color="primary" [attr.aria-label]="'Add' | translate">
+        {{ 'Create new product' | translate }} <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>
   <div class="row" [ngStyle]="{display: dataSource.data.length ? 'block' :'none'}">
-    <!-- <div class="row"> -->
     <div class="col-12">
-
+      {{ 'Add' | translate }}
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <!-- ID Column -->
@@ -22,14 +21,14 @@
 
         <!-- Title Column -->
         <ng-container matColumnDef="title">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Title' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product"><button [routerLink]="[product.id]"
               class="btn btn-link link">{{ product.title }}</button></td>
         </ng-container>
 
         <!-- Price Column -->
         <ng-container matColumnDef="price">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Price' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product">
             <div>{{ product.price }}</div>
           </td>
@@ -37,7 +36,7 @@
 
         <!-- Category Column -->
         <ng-container matColumnDef="category">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Category' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product">
             <div>{{ product.category }}</div>
           </td>
@@ -45,32 +44,34 @@
 
         <!-- Rating Column -->
         <ng-container matColumnDef="rating">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Rating' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product">{{ product.rating.rate }}</td>
         </ng-container>
 
         <!-- Image Column -->
         <ng-container matColumnDef="image">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Image' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product">
-            <img [src]="product.image" alt="Product Image" class="product-image" />
+            <img [src]="product.image" alt="{{ 'Product Image' | translate }}" class="product-image" />
           </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="actions">
-          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <th class="p-1" mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Action' | translate }}</th>
           <td class="p-1" mat-cell *matCellDef="let product">
 
             <div class="d-flex">
-              <button class="p-0 m-0" (click)="delete(product.id)" mat-icon-button color="warn" aria-label="Delete">
+              <button class="p-0 m-0" (click)="delete(product.id)" mat-icon-button color="warn"
+              [attr.aria-label]="'Delete' | translate">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button class="p-0 m-0" [routerLink]="[product.id]" mat-icon-button color="primary" aria-label="View">
+              <button class="p-0 m-0" [routerLink]="[product.id]" mat-icon-button color="primary"
+              [attr.aria-label]="'View' | translate">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
               <button class="p-0 m-0" [routerLink]="[product.id + '/edit']" mat-icon-button color="primary"
-                aria-label="Edit">
+              [attr.aria-label]="'Edit' | translate">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
@@ -83,7 +84,6 @@
       </table>
 
       <div class="d-flex justify-content-end" [ngStyle]="{display: dataSource.data.length ? 'flex' :'none'}">
-        <!-- <div class="d-flex justify-content-end"> -->
         <mat-paginator class="my-4" [pageSizeOptions]="[5, 10, 25, 50]" [pageSize]="pageSize" [pageIndex]="pageIndex"
           [length]="totalItems" (page)="onPageChange($event)">
         </mat-paginator>

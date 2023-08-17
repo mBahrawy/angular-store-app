@@ -1,5 +1,51 @@
 {
-  "HELLO": "Hello",
-  "ARABIC": "Arabic",
-  "ENGLISH": "English"
+  "Angular store": "Angular store",
+  "Login": "Login",
+  "Logout": "Logout",
+
+  "User name": "User name",
+  "Password": "Password",
+  "Please enter username": "Please enter username",
+  "Please enter a valid username": "Please enter a valid username",
+  "Please enter password": "Please enter password",
+
+  "Search for product": "Search for product",
+  "Rating": "Rating",
+  "Stock": "Stock",
+  "Price": "Price",
+  "View": "View",
+  "No products to be shown.": "No products to be shown.",
+
+  "Add": "Add",
+  "Create new product": "Create new product",
+  "Title": "Title",
+  "Category": "Category",
+  "Image": "Image",
+  "Action": "Action",
+  "Delete": "Delete",
+  "Edit": "Edit",
+  "Product Image": "Product Image",
+
+  "Back": "Back",
+  "Add a new product": "Add a new product",
+  "Edit product": "Edit product",
+  "Product form": "Product form",
+  "Description": "Description",
+  "Please enter a product title": "Please enter a product title",
+  "Please enter a product price": "Please enter a product price",
+  "Product description is too short": "Product description is too short",
+  "Product description is too long": "Product description is too long",
+  "Please select a category": "Please select a category",
+  "Image URL": "Image URL",
+  "Please add a product image URL": "Please add a product image URL",
+  "Please add a valid product image URL": "Please add a valid product image URL",
+  "No image to be shown": "No image to be shown",
+  "Create": "Create",
+  "Save": "Save",
+
+  "Filter products": "Filter products",
+  "All categories": "All categories",
+
+  "Product description": "Product description",
+  "reviews": "reviews"
 }
